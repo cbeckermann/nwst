@@ -139,9 +139,8 @@
         <h2>Book This Tour</h2>
         <p class="section-sub">We'll confirm your booking within 2 hours. Secure your spot with a 20% deposit.</p>
       </div>
-      <form class="booking-form" id="bookingForm" name="tour-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <form class="booking-form" id="bookingForm" name="tour-booking" method="POST" action="/thankyou.html" data-netlify="true">
         <input type="hidden" name="form-name" value="tour-booking">
-        <input type="hidden" name="bot-field" style="display:none">
         <div class="booking-form__grid">
           <div class="form-group form-group--full">
             <label for="tourSelect">Selected Tour</label>
