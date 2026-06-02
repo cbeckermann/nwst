@@ -1,0 +1,5 @@
+# DS Store and build artifacts
+.DS_Store
+netlify/.DS_Store
+*.log
+node_modules/
