@@ -1,5 +1,5 @@
 // Netlify automatically calls this function on every form submission.
-// It sends a booking confirmation email to the customer via Resend.
+// It sends a booking confirmation email to the customer via Brevo.
 
 exports.handler = async (event) => {
   try {
@@ -84,23 +84,23 @@ exports.handler = async (event) => {
 </body>
 </html>`;
 
-    const response = await fetch('https://api.resend.com/emails', {
+    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+        'api-key': process.env.BREVO_API_KEY,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from:    'North West Scenic Tours <onboarding@resend.dev>',
-        to:      [customerEmail],
-        subject: `Booking Confirmed — ${tour}`,
-        html:    html,
+        sender:      { name: 'North West Scenic Tours', email: 'chrisgrafix77@gmail.com' },
+        to:          [{ email: customerEmail }],
+        subject:     `Booking Confirmed — ${tour}`,
+        htmlContent: html,
       }),
     });
 
     if (!response.ok) {
       const err = await response.text();
-      console.error('Resend error:', err);
+      console.error('Brevo error:', err);
       return { statusCode: 500, body: 'Email failed' };
     }
 
