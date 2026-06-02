@@ -71,7 +71,7 @@ const TOURS = {
     eyebrow: "Ireland's Wild Atlantic Edge",
     price: 99,
     priceLabel: 'per person',
-    duration: 'Full Day',
+    duration: '7 Hours',
     groupSize: 'Up to 12',
     type: 'Premium',
     difficulty: 'Easy',
