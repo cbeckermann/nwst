@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>North West Scenic Tours — Ireland</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="nav__logo" href="#">
+        <img src="images/logo.png" alt="North West Scenic Tours logo" class="nav__logo-img" />
+        North West Scenic Tours
+      </a>
+      <nav class="nav__links">
+        <a href="#tours">Tours</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#booking" class="btn btn--sm">Book Now</a>
+      </nav>
+      <button class="nav__hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="mobileMenu">
+      <a href="#tours" onclick="closeMobile()">Tours</a>
+      <a href="#about" onclick="closeMobile()">About</a>
+      <a href="#contact" onclick="closeMobile()">Contact</a>
+      <a href="#booking" class="btn btn--outline" onclick="closeMobile()">Book Now</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero__bg"></div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <img src="images/logo.png" alt="North West Scenic Tours" class="hero__logo" />
+      <p class="hero__eyebrow">Discover Ireland's Wild North West</p>
+      <h1 class="hero__title">Scenic Tours<br/>Like No Other</h1>
+      <p class="hero__sub">Breathtaking landscapes, ancient cliffs, and hidden gems — guided by locals who love every mile.</p>
+      <div class="hero__actions">
+        <a href="#tours" class="btn btn--primary">Explore Tours</a>
+        <a href="#booking" class="btn btn--ghost">Book a Tour</a>
+      </div>
+    </div>
+    <div class="hero__scroll-hint">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <div class="stats">
+    <div class="stats__inner">
+      <div class="stats__item"><strong>12+</strong><span>Years of Experience</span></div>
+      <div class="stats__item"><strong>5,000+</strong><span>Happy Travellers</span></div>
+      <div class="stats__item"><strong>18</strong><span>Unique Tours</span></div>
+      <div class="stats__item"><strong>4.9 ★</strong><span>Average Rating</span></div>
+    </div>
+  </div>
+
+  <!-- TOURS -->
+  <section class="tours" id="tours">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Our Packages</p>
+        <h2>Choose Your Adventure</h2>
+        <p class="section-sub">Each tour is carefully crafted to show you the very best of Ireland's stunning north-west coast and countryside.</p>
+      </div>
+
+      <div class="tours__grid" id="toursGrid">
+
+        <article class="tour-card" data-tour="wild-atlantic" onclick="window.location='tour.html?id=wild-atlantic'" style="cursor:pointer">
+          <div class="tour-card__img" style="background-image:url('images/tour-wild-atlantic.jpg')"></div>
+          <div class="tour-card__badge">Most Popular</div>
+          <div class="tour-card__body">
+            <div class="tour-card__meta">
+              <span>&#128336; 8 Hours</span>
+              <span>&#128100; Up to 12</span>
+              <span>&#128640; Full Day</span>
+            </div>
+            <h3>Wild Atlantic Way</h3>
+            <p>Journey along Ireland's most dramatic coastline — soaring sea cliffs, windswept headlands, and charming harbour villages from Donegal to Sligo.</p>
+            <ul class="tour-card__highlights">
+              <li>Slieve League Cliffs (3× higher than Cliffs of Moher)</li>
+              <li>Malin Head — Ireland's most northerly point</li>
+              <li>Traditional Irish pub lunch included</li>
+            </ul>
+            <div class="tour-card__footer">
+              <div class="tour-card__price"><span>From</span> €89 <small>per person</small></div>
+              <button class="btn btn--primary" onclick="openBooking('Wild Atlantic Way', 89)">Book Now</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="tour-card" data-tour="giants" onclick="window.location='tour.html?id=giants-causeway'" style="cursor:pointer">
+          <div class="tour-card__img" style="background-image:url('images/tour-giants-causeway.jpg')"></div>
+          <div class="tour-card__body">
+            <div class="tour-card__meta">
+              <span>&#128336; Full Day</span>
+              <span>&#128100; Up to 10</span>
+              <span>&#128640; Premium</span>
+            </div>
+            <h3>Giant's Causeway &amp; Antrim Coast</h3>
+            <p>Explore UNESCO World Heritage Site Giant's Causeway, the Carrick-a-Rede rope bridge, and the legendary Dark Hedges avenue.</p>
+            <ul class="tour-card__highlights">
+              <li>Giant's Causeway — 40,000 basalt columns</li>
+              <li>Carrick-a-Rede rope bridge crossing</li>
+              <li>Dunluce Castle ruins visit</li>
+            </ul>
+            <div class="tour-card__footer">
+              <div class="tour-card__price"><span>From</span> €105 <small>per person</small></div>
+              <button class="btn btn--primary" onclick="openBooking('Giant\'s Causeway & Antrim Coast', 105)">Book Now</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="tour-card" data-tour="donegal-highlands" onclick="window.location='tour.html?id=donegal-highlands'" style="cursor:pointer">
+          <div class="tour-card__img" style="background-image:url('images/tour-donegal-highlands.jpg')"></div>
+          <div class="tour-card__body">
+            <div class="tour-card__meta">
+              <span>&#128336; 6 Hours</span>
+              <span>&#128100; Up to 14</span>
+              <span>&#128640; Half Day+</span>
+            </div>
+            <h3>Donegal Highlands Explorer</h3>
+            <p>Venture into the rugged heart of Donegal — ancient peat bogs, glassy mountain lakes, and the haunting beauty of Glenveagh National Park.</p>
+            <ul class="tour-card__highlights">
+              <li>Glenveagh National Park &amp; Castle</li>
+              <li>Mount Errigal — Donegal's highest peak</li>
+              <li>Local sheep farm visit &amp; tea</li>
+            </ul>
+            <div class="tour-card__footer">
+              <div class="tour-card__price"><span>From</span> €72 <small>per person</small></div>
+              <button class="btn btn--primary" onclick="openBooking('Donegal Highlands Explorer', 72)">Book Now</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="tour-card" data-tour="sligo-yeats" onclick="window.location='tour.html?id=sligo-yeats'" style="cursor:pointer">
+          <div class="tour-card__img" style="background-image:url('images/tour-sligo-yeats.jpg')"></div>
+          <div class="tour-card__body">
+            <div class="tour-card__meta">
+              <span>&#128336; 5 Hours</span>
+              <span>&#128100; Up to 16</span>
+              <span>&#128640; Cultural</span>
+            </div>
+            <h3>Sligo &amp; Yeats Country</h3>
+            <p>Walk in the footsteps of W.B. Yeats through the landscape that inspired his greatest poetry — Benbulben, Lough Gill, and the Isle of Innisfree.</p>
+            <ul class="tour-card__highlights">
+              <li>Benbulben mountain panoramic stops</li>
+              <li>Yeats's grave at Drumcliffe</li>
+              <li>Lough Gill boat trip to Innisfree</li>
+            </ul>
+            <div class="tour-card__footer">
+              <div class="tour-card__price"><span>From</span> €65 <small>per person</small></div>
+              <button class="btn btn--primary" onclick="openBooking('Sligo & Yeats Country', 65)">Book Now</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="tour-card" data-tour="fermanagh-lakes" onclick="window.location='tour.html?id=fermanagh'" style="cursor:pointer">
+          <div class="tour-card__img" style="background-image:url('images/tour-fermanagh.jpg')"></div>
+          <div class="tour-card__body">
+            <div class="tour-card__meta">
+              <span>&#128336; 7 Hours</span>
+              <span>&#128100; Up to 12</span>
+              <span>&#128640; Nature</span>
+            </div>
+            <h3>Fermanagh Lakelands</h3>
+            <p>Discover the tranquil lake district of County Fermanagh — island monasteries, cave systems, and the legendary Shannon-Erne waterway.</p>
+            <ul class="tour-card__highlights">
+              <li>Devenish Island Round Tower by boat</li>
+              <li>Marble Arch Caves UNESCO Geopark</li>
+              <li>Enniskillen Castle museum visit</li>
+            </ul>
+            <div class="tour-card__footer">
+              <div class="tour-card__price"><span>From</span> €78 <small>per person</small></div>
+              <button class="btn btn--primary" onclick="openBooking('Fermanagh Lakelands', 78)">Book Now</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="tour-card" data-tour="private" onclick="window.location='tour.html?id=private'" style="cursor:pointer">
+          <div class="tour-card__img" style="background-image:url('images/tour-private.jpg')"></div>
+          <div class="tour-card__body">
+            <div class="tour-card__meta">
+              <span>&#128336; Flexible</span>
+              <span>&#128100; Private Group</span>
+              <span>&#128640; Bespoke</span>
+            </div>
+            <h3>Private Bespoke Tour</h3>
+            <p>Design your perfect Irish adventure. Our expert guides will build a fully custom itinerary around your interests, pace, and schedule.</p>
+            <ul class="tour-card__highlights">
+              <li>Fully customisable route &amp; stops</li>
+              <li>Dedicated private guide</li>
+              <li>Flexible duration — half day to multi-day</li>
+            </ul>
+            <div class="tour-card__footer">
+              <div class="tour-card__price"><span>From</span> €220 <small>per group</small></div>
+              <button class="btn btn--primary" onclick="openBooking('Private Bespoke Tour', 220)">Enquire</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE STRIP -->
+  <section class="experience">
+    <div class="experience__inner">
+      <div class="experience__text">
+        <p class="section-eyebrow">Why Choose Us</p>
+        <h2>More Than Just a Tour</h2>
+        <p>Every route is hand-picked by our local guides — born and raised in the north-west. We don't just drive past the highlights; we take you off the beaten track to places most visitors never see.</p>
+        <ul class="experience__list">
+          <li><span>&#10003;</span> Small groups (max 16 people)</li>
+          <li><span>&#10003;</span> Air-conditioned luxury coaches</li>
+          <li><span>&#10003;</span> Expert local guides with storytelling flair</li>
+          <li><span>&#10003;</span> Free pick-up from Derry / Sligo town centres</li>
+          <li><span>&#10003;</span> Free cancellation up to 48 hours before</li>
+        </ul>
+        <a href="#booking" class="btn btn--primary">Reserve Your Spot</a>
+      </div>
+      <div class="experience__img"></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="reviews">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Traveller Stories</p>
+        <h2>What Our Guests Say</h2>
+      </div>
+      <div class="testimonials__grid">
+        <blockquote class="testimonial">
+          <div class="testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"The Wild Atlantic Way tour was the highlight of our entire Ireland trip. Our guide Seamus knew every hidden spot — we saw things no guidebook mentions. Absolutely unforgettable."</p>
+          <footer><strong>Sarah &amp; Tom</strong> — Dublin, Ireland</footer>
+        </blockquote>
+        <blockquote class="testimonial">
+          <div class="testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"We did the Giant's Causeway tour and were blown away. The small group size meant we got personal attention and never felt rushed. The rope bridge was terrifying in the best way!"</p>
+          <footer><strong>Emily Watson</strong> — London, UK</footer>
+        </blockquote>
+        <blockquote class="testimonial">
+          <div class="testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"Booked a private tour for our family of 8. They built a perfect itinerary mixing history, nature and gastronomy. Worth every cent — we'll be back next summer!"</p>
+          <footer><strong>The Kowalski Family</strong> — Chicago, USA</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container about__inner">
+      <div class="about__img"></div>
+      <div class="about__text">
+        <p class="section-eyebrow">Our Story</p>
+        <h2>Rooted in the North West</h2>
+        <p>North West Scenic Tours was founded in 2012 by Donegal native Ciarán O'Donnell with a simple mission: share the wild beauty of Ireland's north-west with the world. What started as a single minibus and a passion for storytelling has grown into Ireland's most loved regional tour operator.</p>
+        <p>Our guides aren't just drivers — they're historians, storytellers, and naturalists who grew up in the landscapes they lead you through. Every tour is a conversation, not a commentary.</p>
+        <div class="about__certs">
+          <span>&#127808; Fáilte Ireland Approved</span>
+          <span>&#127756; TripAdvisor Certificate of Excellence</span>
+          <span>&#9660; Green Tourism Certified</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="booking-section" id="booking">
+    <div class="container">
+      <div class="section-header section-header--light">
+        <p class="section-eyebrow">Reservations</p>
+        <h2>Book Your Tour</h2>
+        <p class="section-sub">Complete the form below and we'll confirm your booking within 2 hours. Secure payment &amp; free cancellation available.</p>
+      </div>
+      <form class="booking-form" id="bookingForm" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="booking">
+        <input type="hidden" name="bot-field" style="display:none">
+        <div class="booking-form__grid">
+
+          <div class="form-group">
+            <label for="tourSelect">Select Tour *</label>
+            <select id="tourSelect" name="tour" required onchange="updatePrice()">
+              <option value="">— Choose a tour —</option>
+              <option value="Wild Atlantic Way|89">Wild Atlantic Way — €89/person</option>
+              <option value="Giant's Causeway & Antrim Coast|105">Giant's Causeway &amp; Antrim Coast — €105/person</option>
+              <option value="Donegal Highlands Explorer|72">Donegal Highlands Explorer — €72/person</option>
+              <option value="Sligo & Yeats Country|65">Sligo &amp; Yeats Country — €65/person</option>
+              <option value="Fermanagh Lakelands|78">Fermanagh Lakelands — €78/person</option>
+              <option value="Private Bespoke Tour|220">Private Bespoke Tour — €220/group</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="tourDate">Preferred Date *</label>
+            <input type="date" id="tourDate" name="date" required />
+          </div>
+
+          <div class="form-group">
+            <label for="guests">Number of Guests *</label>
+            <select id="guests" name="guests" required onchange="updatePrice()">
+              <option value="">— Select —</option>
+              <option value="1">1 person</option>
+              <option value="2">2 people</option>
+              <option value="3">3 people</option>
+              <option value="4">4 people</option>
+              <option value="5">5 people</option>
+              <option value="6">6 people</option>
+              <option value="7">7 people</option>
+              <option value="8">8 people</option>
+              <option value="9+">9+ people (contact us)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="pickup">Pick-up Location</label>
+            <select id="pickup" name="pickup">
+              <option value="">— Optional —</option>
+              <option>Derry / Londonderry City Centre</option>
+              <option>Sligo Town Centre</option>
+              <option>Donegal Town</option>
+              <option>Letterkenny Town Centre</option>
+              <option>Hotel / B&amp;B (specify in notes)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="firstName">First Name *</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Your first name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last Name *</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Your last name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+353 ..." />
+          </div>
+
+          <div class="form-group form-group--full">
+            <label for="notes">Special Requests / Notes</label>
+            <textarea id="notes" name="notes" rows="4" placeholder="Dietary requirements, accessibility needs, specific interests..."></textarea>
+          </div>
+
+        </div>
+
+        <div class="booking-form__summary" id="priceSummary" style="display:none">
+          <div class="price-summary">
+            <span class="price-summary__label">Estimated Total</span>
+            <span class="price-summary__price" id="priceDisplay">€0</span>
+          </div>
+          <p class="price-summary__note">Final price confirmed in booking email. 20% deposit required to secure your date.</p>
+        </div>
+
+        <div class="booking-form__actions">
+          <button type="submit" class="btn btn--primary btn--lg">Confirm Booking Request</button>
+          <p class="booking-form__terms">By submitting you agree to our <a href="#">Terms &amp; Conditions</a>. Free cancellation up to 48h before departure.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container contact__inner">
+      <div>
+        <p class="section-eyebrow">Get In Touch</p>
+        <h2>We'd Love to Hear From You</h2>
+        <p>Have questions about a tour, want to discuss a group booking, or just looking for travel advice in the north-west? Our friendly team is here to help.</p>
+        <div class="contact__details">
+          <div class="contact__item">
+            <span class="contact__icon">&#128222;</span>
+            <div>
+              <strong>Phone</strong>
+              <a href="tel:+35374912345">+353 74 912 3456</a>
+            </div>
+          </div>
+          <div class="contact__item">
+            <span class="contact__icon">&#9993;</span>
+            <div>
+              <strong>Email</strong>
+              <a href="mailto:hello@northwestscenictours.ie">hello@northwestscenictours.ie</a>
+            </div>
+          </div>
+          <div class="contact__item">
+            <span class="contact__icon">&#128205;</span>
+            <div>
+              <strong>Based in</strong>
+              <span>Letterkenny, Co. Donegal, Ireland</span>
+            </div>
+          </div>
+          <div class="contact__item">
+            <span class="contact__icon">&#128336;</span>
+            <div>
+              <strong>Office Hours</strong>
+              <span>Mon–Sat: 8am – 7pm</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact__map">
+        <div class="contact__map-placeholder">
+          <span>&#127760;</span>
+          <p>Letterkenny, Co. Donegal</p>
+          <p>North West Ireland</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="images/logo.png" alt="North West Scenic Tours" class="footer__logo" />
+        <strong>North West Scenic Tours</strong>
+        <p>Ireland's Premier North West Tour Operator since 2012.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Facebook">&#9670;</a>
+          <a href="#" aria-label="Instagram">&#9670;</a>
+          <a href="#" aria-label="TripAdvisor">&#9670;</a>
+        </div>
+      </div>
+      <div class="footer__links">
+        <h4>Tours</h4>
+        <a href="#tours">Wild Atlantic Way</a>
+        <a href="#tours">Giant's Causeway</a>
+        <a href="#tours">Donegal Highlands</a>
+        <a href="#tours">Sligo &amp; Yeats</a>
+        <a href="#tours">Private Tours</a>
+      </div>
+      <div class="footer__links">
+        <h4>Company</h4>
+        <a href="#about">About Us</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+        <a href="#">FAQs</a>
+        <a href="#">Gift Vouchers</a>
+      </div>
+      <div class="footer__links">
+        <h4>Social</h4>
+        <a href="#" aria-label="Facebook">Facebook</a>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="TripAdvisor">TripAdvisor</a>
+        <a href="#" aria-label="Twitter">Twitter / X</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; 2024 North West Scenic Tours Ltd. Registered in Ireland. All rights reserved.</p>
+      <div class="footer__bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cancellation Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOOKING MODAL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+  <div class="modal" id="bookingModal">
+    <button class="modal__close" onclick="closeModal()">&times;</button>
+    <h3 id="modalTitle">Book Tour</h3>
+    <p id="modalDesc">You're booking: <strong id="modalTourName"></strong></p>
+    <p>Scroll down to complete your booking details.</p>
+    <a href="#booking" class="btn btn--primary" onclick="closeModal()">Go to Booking Form</a>
+  </div>
+
+  <!-- SUCCESS TOAST -->
+  <div class="toast" id="toast">
+    <span>&#10003;</span> Booking request sent! We'll confirm within 2 hours.
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

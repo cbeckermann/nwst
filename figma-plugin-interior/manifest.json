@@ -1,0 +1,11 @@
+{
+  "name": "NWST — Tour Detail Pages",
+  "id": "1641853060279297428",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma", "dev"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": ["none"]
+  }
+}

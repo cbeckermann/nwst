@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking Received — North West Scenic Tours</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .thankyou {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--cream);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .thankyou__box {
+      background: white;
+      border-radius: 20px;
+      padding: 64px 48px;
+      max-width: 560px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.10);
+    }
+    .thankyou__icon {
+      width: 72px; height: 72px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 24px;
+      color: white;
+    }
+    .thankyou__box h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 16px;
+      color: var(--dark);
+    }
+    .thankyou__box p {
+      color: var(--mid);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .thankyou__actions { margin-top: 32px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div class="thankyou">
+    <div class="thankyou__box">
+      <div class="thankyou__icon">✓</div>
+      <h1>Booking Request Received!</h1>
+      <p>Thank you for choosing <strong>North West Scenic Tours</strong>. We've received your booking request and will confirm your place within <strong>2 hours</strong>.</p>
+      <p>A confirmation email has been sent to your inbox. If you don't hear from us within 2 hours, please call us on <strong>+353 74 912 3456</strong>.</p>
+      <div class="thankyou__actions">
+        <a href="index.html" class="btn btn--primary">Back to Home</a>
+        <a href="index.html#tours" class="btn btn--outline">Browse More Tours</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

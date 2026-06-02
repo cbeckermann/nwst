@@ -1,0 +1,11 @@
+{
+  "name": "North West Scenic Tours — Landing Page",
+  "id": "1641853060279297427",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma", "dev"],
+  "networkAccess": {
+    "allowedDomains": ["none"]
+  },
+  "documentAccess": "dynamic-page"
+}
