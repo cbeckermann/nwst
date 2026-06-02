@@ -7,25 +7,21 @@
 // ============================================================
 
 const EMAIL_CONFIG = {
-  publicKey:  'YOUR_PUBLIC_KEY',    // Account → API Keys
-  serviceId:  'YOUR_SERVICE_ID',    // Email Services → Service ID
-  templateId: 'YOUR_TEMPLATE_ID',   // Email Templates → Template ID
+  publicKey:              'YOUR_PUBLIC_KEY',              // Account → API Keys
+  serviceId:              'YOUR_SERVICE_ID',              // Email Services → Service ID
+  templateId:             'YOUR_TEMPLATE_ID',             // Admin notification template
+  confirmationTemplateId: 'YOUR_CONFIRMATION_TEMPLATE_ID', // Customer confirmation template
 };
 
-// ---- EmailJS Template Variables (use these in your template) ----
-// {{tour}}         — Tour name
-// {{date}}         — Preferred date
-// {{guests}}       — Number of guests
-// {{pickup}}       — Pick-up location
-// {{first_name}}   — First name
-// {{last_name}}    — Last name
-// {{email}}        — Customer email
-// {{phone}}        — Phone number
-// {{notes}}        — Special requests
-// {{total_price}}  — Estimated total price
-//
-// ---- Recommended Template Setup ----
-// To:      chrisgrafix77@gmail.com
-// CC:      info@tourwith.me
+// ---- Admin Notification Template (templateId) ----
+// To:      {{to_email}}   (chrisgrafix77@gmail.com)
+// CC:      {{cc_email}}   (info@tourwith.me)
 // Subject: New Booking Request — {{tour}}
-// Body:    (use the variables above to build your email body)
+// Variables: {{tour}} {{date}} {{guests}} {{pickup}}
+//            {{first_name}} {{last_name}} {{email}} {{phone}}
+//            {{notes}} {{total_price}}
+
+// ---- Customer Confirmation Template (confirmationTemplateId) ----
+// To:      {{to_email}}   (customer's email address)
+// Subject: Your booking request — {{tour}}
+// Variables: {{customer_name}} {{tour}} {{date}} {{guests}} {{total_price}}

@@ -134,7 +134,19 @@ function submitBooking(e) {
   submitBtn.textContent = 'Sending…';
   submitBtn.disabled = true;
 
+  const confirmationParams = {
+    to_email:      form.email.value,
+    customer_name: form.firstName.value,
+    tour:          tour.name,
+    date:          form.date.value,
+    guests:        guests,
+    total_price:   total,
+  };
+
   emailjs.send(EMAIL_CONFIG.serviceId, EMAIL_CONFIG.templateId, templateParams)
+    .then(function() {
+      return emailjs.send(EMAIL_CONFIG.serviceId, EMAIL_CONFIG.confirmationTemplateId, confirmationParams);
+    })
     .then(function() {
       const toast = document.getElementById('toast');
       toast.textContent = '✓ Booking request sent! We\'ll confirm within 2 hours.';
