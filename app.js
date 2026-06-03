@@ -61,66 +61,6 @@ function closeModal() {
   document.getElementById('bookingModal').classList.remove('active');
 }
 
-// Form submission via EmailJS
-function submitBooking(e) {
-  e.preventDefault();
-  const form = e.target;
-  const submitBtn = form.querySelector('[type="submit"]');
-
-  const tourVal   = form.tour.value;
-  const tourName  = tourVal.includes('|') ? tourVal.split('|')[0] : tourVal;
-  const price     = tourVal.includes('|') ? parseInt(tourVal.split('|')[1]) : 0;
-  const guests    = form.guests.value;
-  const total     = (guests && guests !== '9+') ? `€${price * parseInt(guests)}` : 'Contact for quote';
-
-  const templateParams = {
-    tour:        tourName,
-    date:        form.date.value,
-    guests:      guests,
-    pickup:      form.pickup ? form.pickup.value : '',
-    first_name:  form.firstName.value,
-    last_name:   form.lastName.value,
-    email:       form.email.value,
-    phone:       form.phone.value,
-    notes:       form.notes ? form.notes.value : '',
-    total_price: total,
-    to_email:    'chrisgrafix77@gmail.com',
-    cc_email:    'info@tourwith.me',
-    reply_to:    form.email.value,
-  };
-
-  submitBtn.textContent = 'Sending…';
-  submitBtn.disabled = true;
-
-  emailjs.send(EMAIL_CONFIG.serviceId, EMAIL_CONFIG.templateId, templateParams)
-    .then(function() {
-      showToast('success');
-      form.reset();
-      document.getElementById('priceSummary').style.display = 'none';
-    })
-    .catch(function(err) {
-      console.error('EmailJS error:', err);
-      showToast('error');
-    })
-    .finally(function() {
-      submitBtn.textContent = 'Confirm Booking Request';
-      submitBtn.disabled = false;
-    });
-}
-
-function showToast(type) {
-  const toast = document.getElementById('toast');
-  if (type === 'error') {
-    toast.textContent = '❌ Something went wrong. Please call us on +353 74 912 3456.';
-    toast.style.background = '#cc3333';
-  } else {
-    toast.textContent = '✓ Booking request sent! We\'ll confirm within 2 hours.';
-    toast.style.background = '';
-  }
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 5000);
-}
-
 // Animate tour cards on scroll
 const cards = document.querySelectorAll('.tour-card, .testimonial');
 const observer = new IntersectionObserver((entries) => {

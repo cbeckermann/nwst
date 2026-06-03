@@ -108,58 +108,6 @@ function updatePrice() {
   summary.style.display = 'block';
 }
 
-// Form submit via EmailJS
-function submitBooking(e) {
-  e.preventDefault();
-  const form = e.target;
-  const submitBtn = form.querySelector('[type="submit"]');
-  const guests = form.guests.value;
-  const total  = (guests && guests !== '9+') ? `€${tour.price * parseInt(guests)}` : 'Contact for quote';
-
-  const templateParams = {
-    tour:        tour.name,
-    date:        form.date.value,
-    guests:      guests,
-    pickup:      '',
-    first_name:  form.firstName.value,
-    last_name:   form.lastName.value,
-    email:       form.email.value,
-    phone:       form.phone.value,
-    notes:       form.notes ? form.notes.value : '',
-    total_price: total,
-    to_email:    'chrisgrafix77@gmail.com',
-    cc_email:    'info@tourwith.me',
-    reply_to:    form.email.value,
-  };
-
-  submitBtn.textContent = 'Sending…';
-  submitBtn.disabled = true;
-
-  emailjs.send(EMAIL_CONFIG.serviceId, EMAIL_CONFIG.templateId, templateParams)
-    .then(function() {
-      const toast = document.getElementById('toast');
-      toast.textContent = '✓ Booking request sent! We\'ll confirm within 2 hours.';
-      toast.style.background = '';
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 5000);
-      form.reset();
-      document.getElementById('tourSelect').value = tour.name;
-      document.getElementById('priceSummary').style.display = 'none';
-    })
-    .catch(function(err) {
-      console.error('EmailJS error:', err);
-      const toast = document.getElementById('toast');
-      toast.textContent = '❌ Something went wrong. Please call us on +353 74 912 3456.';
-      toast.style.background = '#cc3333';
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 5000);
-    })
-    .finally(function() {
-      submitBtn.textContent = 'Confirm Booking Request';
-      submitBtn.disabled = false;
-    });
-}
-
 // Sticky bar scroll
 const bar = document.querySelector('.tour-bar');
 const hero = document.getElementById('tourHero');
