@@ -755,6 +755,27 @@ ul { list-style: none; }
 .footer__social a:hover { background: var(--green); }
 .footer__links { display: flex; flex-direction: column; gap: 10px; }
 .footer__links h4 { color: white; font-size: .8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.footer__qr-wrap {
+  width: 140px;
+  height: 162px;
+  overflow: hidden;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+.footer__qr-wrap img {
+  display: block;
+  width: 168px;
+  height: auto;
+  margin-left: -14px;
+  margin-top: -34px;
+}
+.footer__qr-caption {
+  font-size: .78rem;
+  color: rgba(255,255,255,.5);
+  line-height: 1.4;
+  max-width: 140px;
+  margin-top: -2px;
+}
 .footer__links a { font-size: .88rem; transition: color .2s; }
 .footer__links a:hover { color: var(--gold); }
 .footer__bottom {
