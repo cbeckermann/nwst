@@ -756,18 +756,14 @@ ul { list-style: none; }
 .footer__links { display: flex; flex-direction: column; gap: 10px; }
 .footer__links h4 { color: white; font-size: .8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
 .footer__qr-wrap {
-  width: 140px;
-  height: 162px;
-  overflow: hidden;
-  border-radius: 12px;
+  width: 130px;
+  height: 125px;
+  border-radius: 8px;
   flex-shrink: 0;
-}
-.footer__qr-wrap img {
-  display: block;
-  width: 168px;
-  height: auto;
-  margin-left: -14px;
-  margin-top: -34px;
+  background-image: url('images/whatsapp-qr.png');
+  background-size: 244px auto;
+  background-position: -58px -148px;
+  background-color: white;
 }
 .footer__qr-caption {
   font-size: .78rem;
