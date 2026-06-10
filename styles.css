@@ -744,13 +744,14 @@ ul { list-style: none; }
 .footer__brand p { font-size: .88rem; line-height: 1.6; max-width: 260px; }
 .footer__social { display: flex; gap: 12px; margin-top: 20px; }
 .footer__social a {
-  width: 36px; height: 36px;
+  width: 38px; height: 38px;
   background: rgba(255,255,255,.08);
   border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
-  font-size: .7rem;
-  transition: background .2s;
+  color: rgba(255,255,255,.8);
+  transition: background .2s, color .2s;
 }
+.footer__social a svg { display: block; }
 .footer__social a:hover { background: var(--green); }
 .footer__links { display: flex; flex-direction: column; gap: 10px; }
 .footer__links h4 { color: white; font-size: .8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
