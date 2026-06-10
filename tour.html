@@ -6,6 +6,7 @@
   <title id="pageTitle">Tour Details — North West Scenic Tours</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="tour.css" />
+  <link rel="stylesheet" href="vendor/flatpickr.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 </head>
@@ -15,9 +16,10 @@
   <header class="nav scrolled" id="nav">
     <div class="nav__inner">
       <a class="nav__logo" href="index.html">
-        <img src="images/logo.png" alt="North West Scenic Tours logo" class="nav__logo-img" />
+        <img src="images/figma-logo.png" alt="North West Scenic Tours logo" class="nav__logo-img" />
         North West Scenic Tours
       </a>
+      <a href="index.html#tours" class="tour-nav__back">&#8592; All Tours</a>
       <nav class="nav__links">
         <a href="index.html#tours">Tours</a>
         <a href="index.html#about">About</a>
@@ -79,22 +81,36 @@
         <ul class="tour-highlights" id="tourHighlights"></ul>
       </section>
 
+      <!-- Stops -->
+      <section class="tour-section" id="tourStopsSection" style="display:none">
+        <h2>Stops</h2>
+        <div class="tour-stops" id="tourStops"></div>
+      </section>
+
+      <!-- Pick up Points -->
+      <section class="tour-section" id="tourPickupSection" style="display:none">
+        <h2>Pick up Points</h2>
+        <div class="tour-pickup" id="tourPickup"></div>
+      </section>
+
+
       <!-- Itinerary -->
       <section class="tour-section">
-        <h2>What to Expect</h2>
+        <h2>Itinerary</h2>
         <div class="tour-itinerary" id="tourItinerary"></div>
       </section>
 
-      <!-- Included -->
-      <section class="tour-section tour-included-section">
-        <div class="tour-included">
+      <!-- Included / Excluded -->
+      <section class="tour-section">
+        <h2>What's Included</h2>
+        <div class="tour-inc-exc">
           <div>
-            <h3>&#10003; What's Included</h3>
-            <ul id="tourIncluded"></ul>
+            <h4>Included</h4>
+            <ul class="tour-highlights" id="tourIncluded"></ul>
           </div>
           <div>
-            <h3>&#10007; Not Included</h3>
-            <ul id="tourExcluded"></ul>
+            <h4>Not Included</h4>
+            <ul class="tour-highlights tour-highlights--exc" id="tourExcluded"></ul>
           </div>
         </div>
       </section>
@@ -104,6 +120,7 @@
         <h2>Photo Gallery</h2>
         <div class="tour-gallery" id="tourGallery"></div>
       </section>
+
 
     </div>
 
@@ -139,7 +156,7 @@
         <h2>Book This Tour</h2>
         <p class="section-sub">We'll confirm your booking within 2 hours. Secure your spot with a 20% deposit.</p>
       </div>
-      <form class="booking-form" id="bookingForm" name="tour-booking" method="POST" action="/thankyou.html" data-netlify="true">
+      <form class="booking-form booking-form--tour" id="bookingForm" name="tour-booking" method="POST" action="/thankyou.html" data-netlify="true">
         <input type="hidden" name="form-name" value="tour-booking">
         <div class="booking-form__grid">
           <div class="form-group form-group--full">
@@ -148,7 +165,7 @@
           </div>
           <div class="form-group">
             <label for="tourDate">Preferred Date *</label>
-            <input type="date" id="tourDate" name="date" required />
+            <input type="text" id="tourDate" name="date" placeholder="Select a Saturday" required />
           </div>
           <div class="form-group">
             <label for="guests">Number of Guests *</label>
@@ -178,8 +195,40 @@
             <input type="email" id="email" name="email" required />
           </div>
           <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" />
+            <label for="phoneNumber">Phone Number</label>
+            <div class="phone-input">
+              <select class="phone-input__dial" id="phoneDial" aria-label="Country code">
+                <option value="+353">🇮🇪 +353</option>
+                <option value="+44">🇬🇧 +44</option>
+                <option value="+1">🇺🇸 +1</option>
+                <option value="+1">🇨🇦 +1</option>
+                <option value="+61">🇦🇺 +61</option>
+                <option value="+64">🇳🇿 +64</option>
+                <option value="+33">🇫🇷 +33</option>
+                <option value="+49">🇩🇪 +49</option>
+                <option value="+31">🇳🇱 +31</option>
+                <option value="+32">🇧🇪 +32</option>
+                <option value="+34">🇪🇸 +34</option>
+                <option value="+39">🇮🇹 +39</option>
+                <option value="+351">🇵🇹 +351</option>
+                <option value="+46">🇸🇪 +46</option>
+                <option value="+47">🇳🇴 +47</option>
+                <option value="+45">🇩🇰 +45</option>
+                <option value="+358">🇫🇮 +358</option>
+                <option value="+41">🇨🇭 +41</option>
+                <option value="+43">🇦🇹 +43</option>
+                <option value="+48">🇵🇱 +48</option>
+                <option value="+420">🇨🇿 +420</option>
+                <option value="+36">🇭🇺 +36</option>
+                <option value="+7">🇷🇺 +7</option>
+                <option value="+81">🇯🇵 +81</option>
+                <option value="+86">🇨🇳 +86</option>
+                <option value="+91">🇮🇳 +91</option>
+                <option value="+55">🇧🇷 +55</option>
+                <option value="+27">🇿🇦 +27</option>
+              </select>
+              <input class="phone-input__number" type="tel" id="phoneNumber" name="phone" placeholder="Phone number" />
+            </div>
           </div>
           <div class="form-group form-group--full">
             <label for="notes">Special Requests</label>
@@ -215,7 +264,7 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
-        <img src="images/logo.png" alt="North West Scenic Tours" class="footer__logo" />
+        <img src="images/figma-logo.png" alt="North West Scenic Tours" class="footer__logo" />
         <strong>North West Scenic Tours</strong>
         <p>Ireland's Premier North West Tour Operator since 2012.</p>
       </div>
@@ -250,6 +299,8 @@
 
   <div class="toast" id="toast">&#10003; Booking request sent! We'll confirm within 2 hours.</div>
 
+  <script src="vendor/flatpickr.min.js"></script>
+  <script src="calendar.js"></script>
   <script src="tours-data.js"></script>
   <script src="tour.js"></script>
 </body>

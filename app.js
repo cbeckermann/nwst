@@ -14,13 +14,7 @@ function closeMobile() {
   mobileMenu.classList.remove('open');
 }
 
-// Set minimum date to today
-const dateInput = document.getElementById('tourDate');
-const today = new Date();
-const yyyy = today.getFullYear();
-const mm = String(today.getMonth() + 1).padStart(2, '0');
-const dd = String(today.getDate()).padStart(2, '0');
-dateInput.min = `${yyyy}-${mm}-${dd}`;
+initSaturdayPicker('tourDate');
 
 // Price calculator
 function updatePrice() {

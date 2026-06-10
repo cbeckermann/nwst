@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>North West Scenic Tours — Ireland</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="vendor/flatpickr.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 </head>
@@ -14,7 +15,7 @@
   <header class="nav" id="nav">
     <div class="nav__inner">
       <a class="nav__logo" href="#">
-        <img src="images/logo.png" alt="North West Scenic Tours logo" class="nav__logo-img" />
+        <img src="images/figma-logo.png" alt="North West Scenic Tours logo" class="nav__logo-img" />
         North West Scenic Tours
       </a>
       <nav class="nav__links">
@@ -40,7 +41,7 @@
     <div class="hero__bg"></div>
     <div class="hero__overlay"></div>
     <div class="hero__content">
-      <img src="images/logo.png" alt="North West Scenic Tours" class="hero__logo" />
+      <img src="images/figma-logo.png" alt="North West Scenic Tours" class="hero__logo" />
       <p class="hero__eyebrow">Discover Ireland's Wild North West</p>
       <h1 class="hero__title">Scenic Tours<br/>Like No Other</h1>
       <p class="hero__sub">Breathtaking landscapes, ancient cliffs, and hidden gems — guided by locals who love every mile.</p>
@@ -77,7 +78,7 @@
       <div class="tours__grid" id="toursGrid">
 
         <article class="tour-card" data-tour="wild-atlantic" onclick="window.location='tour.html?id=wild-atlantic'" style="cursor:pointer">
-          <div class="tour-card__img" style="background-image:url('images/tour-wild-atlantic.jpg')"></div>
+          <div class="tour-card__img" style="background-image:url('images/figma-wild-atlantic.jpg')"></div>
           <div class="tour-card__badge">Most Popular</div>
           <div class="tour-card__body">
             <div class="tour-card__meta">
@@ -99,9 +100,8 @@
           </div>
         </article>
 
-        <article class="tour-card" data-tour="malin-head" style="opacity:0.5;cursor:default;pointer-events:none;">
-          <div class="tour-card__img" style="background-image:url('images/tour-giants-causeway.jpg')"></div>
-          <div class="tour-card__badge" style="background:#888;">Coming Soon</div>
+        <article class="tour-card" data-tour="malin-head" onclick="window.location='tour.html?id=malin-head'" style="cursor:pointer">
+          <div class="tour-card__img" style="background-image:url('images/figma-malin-head.jpg')"></div>
           <div class="tour-card__body">
             <div class="tour-card__meta">
               <span>&#128336; 7 Hours</span>
@@ -172,24 +172,6 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="container about__inner">
-      <div class="about__img"></div>
-      <div class="about__text">
-        <p class="section-eyebrow">Our Story</p>
-        <h2>Rooted in the North West</h2>
-        <p>North West Scenic Tours was founded in 2012 by Donegal native Ciarán O'Donnell with a simple mission: share the wild beauty of Ireland's north-west with the world. What started as a single minibus and a passion for storytelling has grown into Ireland's most loved regional tour operator.</p>
-        <p>Our guides aren't just drivers — they're historians, storytellers, and naturalists who grew up in the landscapes they lead you through. Every tour is a conversation, not a commentary.</p>
-        <div class="about__certs">
-          <span>&#127808; Fáilte Ireland Approved</span>
-          <span>&#127756; TripAdvisor Certificate of Excellence</span>
-          <span>&#9660; Green Tourism Certified</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- BOOKING -->
   <section class="booking-section" id="booking">
     <div class="container">
@@ -207,12 +189,13 @@
             <select id="tourSelect" name="tour" required onchange="updatePrice()">
               <option value="">— Choose a tour —</option>
               <option value="Wild Atlantic Way|99">Wild Atlantic Way — €99/person</option>
+              <option value="Malin Head|99">Malin Head — €99/person</option>
             </select>
           </div>
 
           <div class="form-group">
             <label for="tourDate">Preferred Date *</label>
-            <input type="date" id="tourDate" name="date" required />
+            <input type="text" id="tourDate" name="date" placeholder="Select a Saturday" required />
           </div>
 
           <div class="form-group">
@@ -259,8 +242,40 @@
           </div>
 
           <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="+353 ..." />
+            <label for="phoneNumber">Phone Number</label>
+            <div class="phone-input">
+              <select class="phone-input__dial" id="phoneDial" aria-label="Country code">
+                <option value="+353">🇮🇪 +353</option>
+                <option value="+44">🇬🇧 +44</option>
+                <option value="+1">🇺🇸 +1</option>
+                <option value="+1">🇨🇦 +1</option>
+                <option value="+61">🇦🇺 +61</option>
+                <option value="+64">🇳🇿 +64</option>
+                <option value="+33">🇫🇷 +33</option>
+                <option value="+49">🇩🇪 +49</option>
+                <option value="+31">🇳🇱 +31</option>
+                <option value="+32">🇧🇪 +32</option>
+                <option value="+34">🇪🇸 +34</option>
+                <option value="+39">🇮🇹 +39</option>
+                <option value="+351">🇵🇹 +351</option>
+                <option value="+46">🇸🇪 +46</option>
+                <option value="+47">🇳🇴 +47</option>
+                <option value="+45">🇩🇰 +45</option>
+                <option value="+358">🇫🇮 +358</option>
+                <option value="+41">🇨🇭 +41</option>
+                <option value="+43">🇦🇹 +43</option>
+                <option value="+48">🇵🇱 +48</option>
+                <option value="+420">🇨🇿 +420</option>
+                <option value="+36">🇭🇺 +36</option>
+                <option value="+7">🇷🇺 +7</option>
+                <option value="+81">🇯🇵 +81</option>
+                <option value="+86">🇨🇳 +86</option>
+                <option value="+91">🇮🇳 +91</option>
+                <option value="+55">🇧🇷 +55</option>
+                <option value="+27">🇿🇦 +27</option>
+              </select>
+              <input class="phone-input__number" type="tel" id="phoneNumber" name="phone" placeholder="Phone number" />
+            </div>
           </div>
 
           <div class="form-group form-group--full">
@@ -297,7 +312,7 @@
           <div class="contact__item">
             <span class="contact__icon">&#128222;</span>
             <div>
-              <strong>Phone</strong>
+              <strong>WhatsApp</strong>
               <a href="tel:+35374912345">+353 74 912 3456</a>
             </div>
           </div>
@@ -311,25 +326,21 @@
           <div class="contact__item">
             <span class="contact__icon">&#128205;</span>
             <div>
-              <strong>Based in</strong>
+              <strong>Based In</strong>
               <span>Letterkenny, Co. Donegal, Ireland</span>
             </div>
           </div>
           <div class="contact__item">
             <span class="contact__icon">&#128336;</span>
             <div>
-              <strong>Office Hours</strong>
+              <strong>Hours</strong>
               <span>Mon–Sat: 8am – 7pm</span>
             </div>
           </div>
         </div>
       </div>
       <div class="contact__map">
-        <div class="contact__map-placeholder">
-          <span>&#127760;</span>
-          <p>Letterkenny, Co. Donegal</p>
-          <p>North West Ireland</p>
-        </div>
+        <img src="images/figma-contact-map.png" alt="Map of Letterkenny, Co. Donegal" style="width:100%;height:100%;object-fit:cover;border-radius:16px;display:block;" />
       </div>
     </div>
   </section>
@@ -338,7 +349,7 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
-        <img src="images/logo.png" alt="North West Scenic Tours" class="footer__logo" />
+        <img src="images/figma-logo.png" alt="North West Scenic Tours" class="footer__logo" />
         <strong>North West Scenic Tours</strong>
         <p>Ireland's Premier North West Tour Operator since 2012.</p>
         <div class="footer__social">
@@ -395,6 +406,8 @@
     <span>&#10003;</span> Booking request sent! We'll confirm within 2 hours.
   </div>
 
+  <script src="vendor/flatpickr.min.js"></script>
+  <script src="calendar.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

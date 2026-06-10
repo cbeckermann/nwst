@@ -60,6 +60,27 @@ document.getElementById('tourItinerary').innerHTML = tour.itinerary
     </div>
   `).join('');
 
+// Stops
+if (tour.stops && tour.stops.length) {
+  document.getElementById('tourStopsSection').style.display = '';
+  document.getElementById('tourStops').innerHTML = tour.stops
+    .map((s, i) => `
+      <div class="tour-stop">
+        <div class="tour-stop__label">Stop ${i + 1}</div>
+        <div class="tour-stop__dot"></div>
+        <div class="tour-stop__name">${s}</div>
+      </div>
+    `).join('');
+}
+
+// Pick up Points
+if (tour.pickupPoints && tour.pickupPoints.length) {
+  document.getElementById('tourPickupSection').style.display = '';
+  document.getElementById('tourPickup').innerHTML = tour.pickupPoints
+    .map(p => `<div class="tour-pickup__item">${p}</div>`)
+    .join('');
+}
+
 // Included / excluded
 document.getElementById('tourIncluded').innerHTML = tour.included
   .map(i => `<li>${i}</li>`).join('');
@@ -73,9 +94,7 @@ document.getElementById('tourGallery').innerHTML = tour.gallery
 
 // Booking form pre-fill
 document.getElementById('tourSelect').value = tour.name;
-const dateInput = document.getElementById('tourDate');
-const today = new Date();
-dateInput.min = today.toISOString().split('T')[0];
+initSaturdayPicker('tourDate');
 
 // Related tours (3 others)
 const related = Object.values(TOURS).filter(t => t.id !== tourId).slice(0, 3);
