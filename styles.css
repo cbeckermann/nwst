@@ -344,6 +344,36 @@ ul { list-style: none; }
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
 }
+.tours__single {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.tour-card.tour-card--wide {
+  flex-direction: row;
+}
+.tour-card.tour-card--wide .tour-card__img {
+  width: 420px;
+  min-width: 420px;
+  min-height: 320px;
+  height: auto;
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+.tour-card.tour-card--wide .tour-card__body {
+  padding: 36px 40px;
+}
+.tour-card.tour-card--wide .tour-card__body h3 {
+  font-size: 1.55rem;
+  margin-bottom: 14px;
+}
+.tour-card.tour-card--wide .tour-card__body p {
+  font-size: .95rem;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .tour-card.tour-card--wide { flex-direction: column; }
+  .tour-card.tour-card--wide .tour-card__img { width: 100%; min-width: 0; height: 220px; min-height: 0; border-radius: var(--radius) var(--radius) 0 0; }
+  .tour-card.tour-card--wide .tour-card__body { padding: 24px; }
+}
 .tour-card {
   background: white;
   border-radius: var(--radius);
