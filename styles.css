@@ -706,13 +706,13 @@ ul { list-style: none; }
   font-size: 1.3rem;
   width: 44px;
   height: 44px;
-  background: #f8f4ef;
+  background: var(--green);
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--green);
+  color: #f8f4ef;
 }
 .contact__item strong { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--light); margin-bottom: 2px; }
 .contact__item a, .contact__item span { font-size: .95rem; color: var(--dark); font-weight: 500; }
