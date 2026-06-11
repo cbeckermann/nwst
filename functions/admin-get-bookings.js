@@ -37,5 +37,6 @@ exports.handler = async (event) => {
 
 function isAuthorized(event) {
   const auth = event.headers.authorization || '';
-  return auth.startsWith('Bearer ') && auth.length > 10;
+  const token = auth.replace('Bearer ', '');
+  return token === process.env.ADMIN_SESSION_TOKEN;
 }

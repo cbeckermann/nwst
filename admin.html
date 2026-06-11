@@ -151,7 +151,20 @@
   <div class="login-card">
     <h1>North West Scenic Tours</h1>
     <p>Admin Dashboard — sign in to continue</p>
-    <button class="login-btn" id="loginBtn">Sign In with Netlify Identity</button>
+    <form id="loginForm">
+      <div style="margin-bottom:14px;text-align:left">
+        <label style="font-size:.82rem;font-weight:600;color:#555;display:block;margin-bottom:5px">Email</label>
+        <input type="email" id="loginEmail" placeholder="your@email.com" required
+          style="width:100%;padding:11px 14px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:.95rem;font-family:inherit;outline:none" />
+      </div>
+      <div style="margin-bottom:20px;text-align:left">
+        <label style="font-size:.82rem;font-weight:600;color:#555;display:block;margin-bottom:5px">Password</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" required
+          style="width:100%;padding:11px 14px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:.95rem;font-family:inherit;outline:none" />
+      </div>
+      <p id="loginError" style="color:#c0392b;font-size:.83rem;margin-bottom:12px;display:none"></p>
+      <button type="submit" class="login-btn" id="loginBtn">Sign In</button>
+    </form>
   </div>
 </div>
 
@@ -162,7 +175,7 @@
       <span>●</span> NWST Admin
     </div>
     <div class="topbar__right">
-      <span class="topbar__user" id="userEmail"></span>
+      <span class="topbar__user">North West Scenic Tours</span>
       <button class="logout-btn" id="logoutBtn">Sign Out</button>
     </div>
   </div>
@@ -215,49 +228,70 @@
   </div>
 </div>
 
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
 const MAX = 18;
 let allBookings = [];
-let currentUser = null;
+let sessionToken = localStorage.getItem('nwst_admin_token') || '';
 
-const netlifyIdentity = window.netlifyIdentity;
+// Auto-login if token stored
+if (sessionToken) showDashboard();
 
-netlifyIdentity.on('init', user => {
-  if (user) showDashboard(user);
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('loginBtn');
+  const errEl = document.getElementById('loginError');
+  btn.disabled = true;
+  btn.textContent = 'Signing in…';
+  errEl.style.display = 'none';
+
+  const username = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+
+  try {
+    const res = await fetch('/.netlify/functions/admin-login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    const data = await res.json();
+    if (res.ok && data.token) {
+      sessionToken = data.token;
+      localStorage.setItem('nwst_admin_token', sessionToken);
+      showDashboard();
+    } else {
+      errEl.textContent = data.error || 'Invalid credentials';
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Sign In';
+    }
+  } catch {
+    errEl.textContent = 'Network error — please try again.';
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Sign In';
+  }
 });
 
-netlifyIdentity.on('login', user => {
-  netlifyIdentity.close();
-  showDashboard(user);
-});
-
-netlifyIdentity.on('logout', () => {
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  localStorage.removeItem('nwst_admin_token');
+  sessionToken = '';
   document.getElementById('dashboard').style.display = 'none';
   document.getElementById('loginScreen').style.display = 'flex';
 });
 
-netlifyIdentity.init();
-
-document.getElementById('loginBtn').addEventListener('click', () => netlifyIdentity.open('login'));
-document.getElementById('logoutBtn').addEventListener('click', () => netlifyIdentity.logout());
-
 document.getElementById('filterDate').addEventListener('change', renderTable);
 document.getElementById('filterStatus').addEventListener('change', renderTable);
 
-function showDashboard(user) {
-  currentUser = user;
+function showDashboard() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('dashboard').style.display = 'block';
-  document.getElementById('userEmail').textContent = user.email;
   loadAll();
 }
 
 async function authFetch(url, opts = {}) {
-  const token = currentUser.token.access_token;
   return fetch(url, {
     ...opts,
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}`, ...(opts.headers || {}) }
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${sessionToken}`, ...(opts.headers || {}) }
   });
 }
 
