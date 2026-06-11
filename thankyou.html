@@ -44,6 +44,19 @@
       margin-bottom: 12px;
     }
     .thankyou__actions { margin-top: 32px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .thankyou__qr { margin: 24px auto 0; }
+    .thankyou__qr-label { font-size: .82rem; color: var(--light); margin-bottom: 10px; }
+    .thankyou__qr-img {
+      width: 150px;
+      height: 145px;
+      border-radius: 12px;
+      margin: 0 auto;
+      background-image: url('images/whatsapp-qr.png');
+      background-size: 282px auto;
+      background-position: -67px -171px;
+      background-color: white;
+      box-shadow: 0 2px 12px rgba(0,0,0,.10);
+    }
   </style>
 </head>
 <body>
@@ -52,7 +65,11 @@
       <div class="thankyou__icon">✓</div>
       <h1>Booking Request Received!</h1>
       <p>Thank you for choosing <strong>North West Scenic Tours</strong>. We've received your booking request and will confirm your place within <strong>2 hours</strong>.</p>
-      <p>A confirmation email has been sent to your inbox. If you don't hear from us within 2 hours, please call us on <strong>+353 74 912 3456</strong>.</p>
+      <p>A confirmation email has been sent to your inbox. If you don't hear from us within 2 hours, scan below to reach us directly on WhatsApp.</p>
+      <div class="thankyou__qr">
+        <p class="thankyou__qr-label">Scan to message Sharon on WhatsApp</p>
+        <div class="thankyou__qr-img"></div>
+      </div>
       <div class="thankyou__actions">
         <a href="index.html" class="btn btn--primary">Back to Home</a>
         <a href="index.html#tours" class="btn btn--outline">Browse More Tours</a>
