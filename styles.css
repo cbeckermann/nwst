@@ -787,6 +787,11 @@ ul { list-style: none; }
   font-size: .8rem;
   color: rgba(255,255,255,.4);
 }
+.footer__admin-link {
+  display: flex; align-items: center; gap: 5px;
+  opacity: .4; transition: opacity .2s;
+}
+.footer__admin-link:hover { opacity: 1; }
 .footer__bottom-links {
   display: flex;
   gap: 24px;
