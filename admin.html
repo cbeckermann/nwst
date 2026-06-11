@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — North West Scenic Tours</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #1a6b3c;
+      --green-l: #238a4e;
+      --red: #c0392b;
+      --gold: #c9932a;
+      --dark: #1a1a1a;
+      --mid: #555;
+      --light: #999;
+      --cream: #f8f4ef;
+      --white: #fff;
+      --radius: 10px;
+      --shadow: 0 2px 12px rgba(0,0,0,.07);
+    }
+    body { font-family: 'Inter', sans-serif; background: #f0f2f5; color: var(--dark); min-height: 100vh; }
+
+    /* LOGIN */
+    #loginScreen {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; background: var(--dark);
+    }
+    .login-card {
+      background: white; border-radius: 16px; padding: 48px 40px;
+      width: 100%; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,.3);
+      text-align: center;
+    }
+    .login-card h1 { font-size: 1.4rem; margin-bottom: 6px; }
+    .login-card p { color: var(--light); font-size: .9rem; margin-bottom: 32px; }
+    .login-btn {
+      width: 100%; padding: 14px; background: var(--green); color: white;
+      border: none; border-radius: 8px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: background .2s;
+    }
+    .login-btn:hover { background: var(--green-l); }
+
+    /* DASHBOARD */
+    #dashboard { display: none; }
+    .topbar {
+      background: var(--dark); color: white; padding: 0 32px;
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .topbar__brand { font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 10px; }
+    .topbar__brand span { color: #4ade80; }
+    .topbar__right { display: flex; align-items: center; gap: 16px; }
+    .topbar__user { font-size: .85rem; color: rgba(255,255,255,.6); }
+    .logout-btn {
+      background: rgba(255,255,255,.1); border: none; color: white;
+      padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: .85rem;
+      transition: background .2s;
+    }
+    .logout-btn:hover { background: rgba(255,255,255,.2); }
+
+    .main { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+
+    /* STATS */
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+    .stat-card {
+      background: white; border-radius: var(--radius); padding: 20px 24px;
+      box-shadow: var(--shadow);
+    }
+    .stat-card__label { font-size: .78rem; text-transform: uppercase; letter-spacing: 1px; color: var(--light); margin-bottom: 6px; }
+    .stat-card__value { font-size: 2rem; font-weight: 700; color: var(--dark); }
+    .stat-card__value.green { color: var(--green); }
+    .stat-card__value.red { color: var(--red); }
+
+    /* UPCOMING */
+    .section-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
+    .upcoming-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 32px; }
+    .date-card {
+      background: white; border-radius: var(--radius); padding: 16px;
+      box-shadow: var(--shadow); border-left: 4px solid var(--green);
+    }
+    .date-card--full { border-left-color: var(--red); }
+    .date-card--blocked { border-left-color: var(--light); opacity: .6; }
+    .date-card__date { font-weight: 700; font-size: .95rem; margin-bottom: 6px; }
+    .date-card__sub { font-size: .78rem; color: var(--light); margin-bottom: 10px; }
+    .capacity-bar { height: 6px; background: #eee; border-radius: 3px; overflow: hidden; }
+    .capacity-bar__fill { height: 100%; border-radius: 3px; background: var(--green); transition: width .4s; }
+    .capacity-bar__fill--warn { background: var(--gold); }
+    .capacity-bar__fill--full { background: var(--red); }
+    .date-card__spots { font-size: .78rem; margin-top: 6px; }
+    .date-card__spots.full { color: var(--red); font-weight: 600; }
+    .date-card__spots.ok { color: var(--green); }
+
+    /* BOOKINGS TABLE */
+    .card { background: white; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 24px; }
+    .card__header {
+      padding: 16px 24px; border-bottom: 1px solid #f0f0f0;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .card__header h2 { font-size: 1rem; font-weight: 700; }
+    .filter-row { display: flex; gap: 10px; align-items: center; }
+    .filter-row select, .filter-row input {
+      padding: 7px 12px; border: 1px solid #e0e0e0; border-radius: 6px;
+      font-size: .85rem; font-family: 'Inter', sans-serif;
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+    th {
+      text-align: left; padding: 12px 16px; font-size: .75rem;
+      text-transform: uppercase; letter-spacing: .5px; color: var(--light);
+      border-bottom: 1px solid #f0f0f0; background: #fafafa;
+    }
+    td { padding: 14px 16px; font-size: .88rem; border-bottom: 1px solid #f9f9f9; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fafafa; }
+
+    .status-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 20px;
+      font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+    }
+    .status-badge--pending { background: #fff3cd; color: #856404; }
+    .status-badge--confirmed { background: #d1fae5; color: #065f46; }
+    .status-badge--cancelled { background: #fee2e2; color: #991b1b; }
+
+    .action-btn {
+      padding: 4px 10px; border-radius: 5px; border: none; cursor: pointer;
+      font-size: .75rem; font-weight: 600; margin-right: 4px; transition: opacity .15s;
+    }
+    .action-btn:hover { opacity: .8; }
+    .action-btn--confirm { background: #d1fae5; color: #065f46; }
+    .action-btn--cancel { background: #fee2e2; color: #991b1b; }
+    .action-btn--delete { background: #f3f4f6; color: var(--mid); }
+
+    .empty-state { padding: 48px; text-align: center; color: var(--light); }
+
+    .loading { padding: 32px; text-align: center; color: var(--light); font-size: .9rem; }
+
+    @media (max-width: 768px) {
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .main { padding: 16px; }
+      table { font-size: .8rem; }
+      td, th { padding: 10px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-card">
+    <h1>North West Scenic Tours</h1>
+    <p>Admin Dashboard — sign in to continue</p>
+    <button class="login-btn" id="loginBtn">Sign In with Netlify Identity</button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class="topbar">
+    <div class="topbar__brand">
+      <span>●</span> NWST Admin
+    </div>
+    <div class="topbar__right">
+      <span class="topbar__user" id="userEmail"></span>
+      <button class="logout-btn" id="logoutBtn">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-card__label">Total Bookings</div>
+        <div class="stat-card__value" id="statTotal">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__label">Pending</div>
+        <div class="stat-card__value" id="statPending">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__label">Confirmed</div>
+        <div class="stat-card__value green" id="statConfirmed">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__label">Cancelled</div>
+        <div class="stat-card__value red" id="statCancelled">—</div>
+      </div>
+    </div>
+
+    <!-- Upcoming Saturdays -->
+    <p class="section-title">Upcoming Saturdays</p>
+    <div class="upcoming-grid" id="upcomingGrid">
+      <div class="loading">Loading dates…</div>
+    </div>
+
+    <!-- Bookings -->
+    <div class="card">
+      <div class="card__header">
+        <h2>All Bookings</h2>
+        <div class="filter-row">
+          <select id="filterDate"><option value="">All dates</option></select>
+          <select id="filterStatus">
+            <option value="">All statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+      </div>
+      <div id="bookingsTable"><div class="loading">Loading bookings…</div></div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+const MAX = 18;
+let allBookings = [];
+let currentUser = null;
+
+const netlifyIdentity = window.netlifyIdentity;
+
+netlifyIdentity.on('init', user => {
+  if (user) showDashboard(user);
+});
+
+netlifyIdentity.on('login', user => {
+  netlifyIdentity.close();
+  showDashboard(user);
+});
+
+netlifyIdentity.on('logout', () => {
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+});
+
+netlifyIdentity.init();
+
+document.getElementById('loginBtn').addEventListener('click', () => netlifyIdentity.open('login'));
+document.getElementById('logoutBtn').addEventListener('click', () => netlifyIdentity.logout());
+
+document.getElementById('filterDate').addEventListener('change', renderTable);
+document.getElementById('filterStatus').addEventListener('change', renderTable);
+
+function showDashboard(user) {
+  currentUser = user;
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  document.getElementById('userEmail').textContent = user.email;
+  loadAll();
+}
+
+async function authFetch(url, opts = {}) {
+  const token = currentUser.token.access_token;
+  return fetch(url, {
+    ...opts,
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}`, ...(opts.headers || {}) }
+  });
+}
+
+async function loadAll() {
+  try {
+    const res = await authFetch('/.netlify/functions/admin-get-bookings');
+    const data = await res.json();
+    allBookings = data.bookings || [];
+    renderStats();
+    renderUpcoming();
+    renderTable();
+    populateDateFilter();
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+function renderStats() {
+  document.getElementById('statTotal').textContent = allBookings.length;
+  document.getElementById('statPending').textContent = allBookings.filter(b => b.status === 'Pending').length;
+  document.getElementById('statConfirmed').textContent = allBookings.filter(b => b.status === 'Confirmed').length;
+  document.getElementById('statCancelled').textContent = allBookings.filter(b => b.status === 'Cancelled').length;
+}
+
+function renderUpcoming() {
+  const grid = document.getElementById('upcomingGrid');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const saturdays = [];
+  const d = new Date(today);
+  d.setDate(d.getDate() + ((6 - d.getDay() + 7) % 7 || 7));
+  for (let i = 0; i < 8; i++) {
+    saturdays.push(new Date(d));
+    d.setDate(d.getDate() + 7);
+  }
+
+  grid.innerHTML = saturdays.map(sat => {
+    const iso = sat.toISOString().split('T')[0];
+    const label = sat.toLocaleDateString('en-IE', { day: 'numeric', month: 'short', year: 'numeric' });
+    const booked = allBookings
+      .filter(b => b.date === iso && b.status !== 'Cancelled')
+      .reduce((s, b) => s + (b.guests || 0), 0);
+    const pct = Math.min((booked / MAX) * 100, 100);
+    const full = booked >= MAX;
+    const warn = pct >= 70;
+    const fillClass = full ? 'capacity-bar__fill--full' : warn ? 'capacity-bar__fill--warn' : '';
+    return `
+      <div class="date-card${full ? ' date-card--full' : ''}">
+        <div class="date-card__date">${label}</div>
+        <div class="date-card__sub">${booked}/${MAX} guests</div>
+        <div class="capacity-bar"><div class="capacity-bar__fill ${fillClass}" style="width:${pct}%"></div></div>
+        <div class="date-card__spots ${full ? 'full' : 'ok'}">${full ? 'Fully booked' : `${MAX - booked} spots left`}</div>
+      </div>`;
+  }).join('');
+}
+
+function populateDateFilter() {
+  const dates = [...new Set(allBookings.map(b => b.date))].sort();
+  const sel = document.getElementById('filterDate');
+  sel.innerHTML = '<option value="">All dates</option>' + dates.map(d => {
+    const label = new Date(d + 'T12:00:00').toLocaleDateString('en-IE', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+    return `<option value="${d}">${label}</option>`;
+  }).join('');
+}
+
+function renderTable() {
+  const dateFilter = document.getElementById('filterDate').value;
+  const statusFilter = document.getElementById('filterStatus').value;
+  const filtered = allBookings.filter(b =>
+    (!dateFilter || b.date === dateFilter) &&
+    (!statusFilter || b.status === statusFilter)
+  );
+
+  const container = document.getElementById('bookingsTable');
+  if (!filtered.length) {
+    container.innerHTML = '<div class="empty-state">No bookings found.</div>';
+    return;
+  }
+
+  container.innerHTML = `
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th><th>Name</th><th>Email</th><th>Phone</th>
+          <th>Guests</th><th>Pickup</th><th>Status</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${filtered.map(b => `
+          <tr>
+            <td>${formatDate(b.date)}</td>
+            <td><strong>${b.name || '—'}</strong></td>
+            <td>${b.email || '—'}</td>
+            <td>${b.phone || '—'}</td>
+            <td>${b.guests || '—'}</td>
+            <td>${b.pickup || '—'}</td>
+            <td><span class="status-badge status-badge--${(b.status || 'pending').toLowerCase()}">${b.status || 'Pending'}</span></td>
+            <td>
+              ${b.status !== 'Confirmed' ? `<button class="action-btn action-btn--confirm" onclick="updateStatus('${b.id}','Confirmed')">Confirm</button>` : ''}
+              ${b.status !== 'Cancelled' ? `<button class="action-btn action-btn--cancel" onclick="updateStatus('${b.id}','Cancelled')">Cancel</button>` : ''}
+              <button class="action-btn action-btn--delete" onclick="deleteBooking('${b.id}')">Delete</button>
+            </td>
+          </tr>`).join('')}
+      </tbody>
+    </table>`;
+}
+
+function formatDate(iso) {
+  if (!iso) return '—';
+  return new Date(iso + 'T12:00:00').toLocaleDateString('en-IE', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+async function updateStatus(id, status) {
+  await authFetch('/.netlify/functions/admin-update-booking', {
+    method: 'POST',
+    body: JSON.stringify({ id, status })
+  });
+  await loadAll();
+}
+
+async function deleteBooking(id) {
+  if (!confirm('Delete this booking permanently?')) return;
+  await authFetch('/.netlify/functions/admin-delete-booking', {
+    method: 'POST',
+    body: JSON.stringify({ id })
+  });
+  await loadAll();
+}
+</script>
+
+</body>
+</html>
