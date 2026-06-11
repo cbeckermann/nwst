@@ -656,6 +656,10 @@ ul { list-style: none; }
   padding-right: 40px;
   cursor: pointer;
 }
+.availability-msg { font-size: .82rem; margin-top: 6px; min-height: 18px; }
+.availability-msg--ok { color: var(--green); }
+.availability-msg--full { color: #c0392b; font-weight: 600; }
+.form-error { color: #c0392b; font-size: .88rem; margin-bottom: 12px; }
 .booking-form__summary {
   margin-top: 28px;
 }
