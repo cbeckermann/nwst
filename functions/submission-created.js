@@ -67,17 +67,16 @@ exports.handler = async (event) => {
 
       <p>If you don't hear from us within 2 hours, please don't hesitate to get in touch:</p>
       <p>
-        📞 <strong>+353 74 912 3456</strong><br/>
-        ✉ <a href="mailto:hello@northwestscenictours.ie">hello@northwestscenictours.ie</a>
+        📞 <strong>+353 87 0506348</strong><br/>
+        ✉ <a href="mailto:northwestscenictours@gmail.com">northwestscenictours@gmail.com</a>
       </p>
-      <p style="color:#8a8a8a; font-size:13px;">Free cancellation is available up to 48 hours before your departure date.</p>
 
       <div class="cta">
         <a href="https://northwestscenictours.ie">Visit Our Website</a>
       </div>
     </div>
     <div class="footer">
-      <p>North West Scenic Tours Ltd &nbsp;·&nbsp; Letterkenny, Co. Donegal, Ireland<br/>
+      <p>North West Scenic Tours Ltd &nbsp;·&nbsp; Inishowen, Co. Donegal, Ireland<br/>
       <a href="https://northwestscenictours.ie">northwestscenictours.ie</a></p>
     </div>
   </div>

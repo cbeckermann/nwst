@@ -1,7 +1,7 @@
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const MAX_GUESTS = 18;
+const MAX_GUESTS = 14;
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -126,7 +126,7 @@ async function sendCustomerEmail({ name, email, date, guests, pickup, tour }) {
             <p style="color:#555;line-height:1.7">We look forward to showing you the best of Ireland's north-west!</p>
             <p style="color:#555">Warm regards,<br/><strong>Sharon &amp; the North West Scenic Tours team</strong></p>
           </div>
-          <p style="text-align:center;color:#bbb;font-size:.75rem;margin-top:16px">© 2026 North West Scenic Tours Ltd. Letterkenny, Co. Donegal, Ireland.</p>
+          <p style="text-align:center;color:#bbb;font-size:.75rem;margin-top:16px">© 2026 North West Scenic Tours Ltd. Inishowen, Co. Donegal, Ireland.</p>
         </div>
       `
     })

@@ -1,6 +1,6 @@
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
-const MAX_GUESTS = 18;
+const MAX_GUESTS = 14;
 
 exports.handler = async (event) => {
   const date = event.queryStringParameters && event.queryStringParameters.date;

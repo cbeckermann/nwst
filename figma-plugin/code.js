@@ -133,8 +133,8 @@ function buildStats(y) {
   const items = [
     ['12+','Years of Experience'],
     ['5,000+','Happy Travellers'],
-    ['18','Unique Tours'],
-    ['4.9 ★','Average Rating'],
+    ['6','Unique Tours'],
+    ['5 ★','Average Rating'],
   ];
   items.forEach(function(item, i) {
     const cx = i * (W/4);
@@ -208,11 +208,10 @@ function buildWhy(y) {
   IR(f, "Every route is hand-picked by local guides born and raised in the north-west.\nWe take you off the beaten track to places most visitors never see.",
     100, 222, 16, C.mid, { w:460, lh:26 });
   var bullets = [
-    'Small groups (max 16 people)',
+    'Small groups (max 14 people)',
     'Air-conditioned luxury coaches',
     'Expert local guides with storytelling flair',
-    'Free pick-up from Derry / Sligo town centres',
-    'Free cancellation up to 48 hours before',
+    'Free pick-up from Derry City centre',
   ];
   bullets.forEach(function(b, i) {
     mkRect(f, 100, 314+i*44, 22, 22, C.green, { radius:11 });
@@ -305,10 +304,10 @@ function buildContact(y) {
   IR(f, "Questions about a tour, group bookings, or travel advice in the north-west?\nOur friendly team is here to help.",
     120, 210, 16, C.mid, { w:420, lh:26 });
   var details = [
-    ['📞','Phone','+353 74 912 3456'],
-    ['✉','Email','hello@northwestscenictours.ie'],
-    ['📍','Based in','Letterkenny, Co. Donegal, Ireland'],
-    ['🕐','Hours','Mon–Sat: 8am – 7pm'],
+    ['📞','WhatsApp','+353 87 0506348'],
+    ['✉','Email','northwestscenictours@gmail.com'],
+    ['📍','Based in','Inishowen, Co. Donegal, Ireland'],
+    ['🕐','Hours','Mon–Sat: 10am – 8pm'],
   ];
   details.forEach(function(d, i) {
     var iy = 286+i*64;
@@ -320,7 +319,7 @@ function buildContact(y) {
   const map = mkFrame('Map', 560, 440, C.mutedGreen, 16);
   map.x = 760; map.y = 70;
   IR(map, '🗺', 240, 154, 80, C.green);
-  PB(map, 'Letterkenny', 185, 256, 20, C.greenD, { w:190, align:'CENTER' });
+  PB(map, 'Inishowen', 185, 256, 20, C.greenD, { w:190, align:'CENTER' });
   IR(map, 'Co. Donegal, Ireland', 178, 288, 15, C.greenD, { w:204, align:'CENTER' });
   f.appendChild(map);
   return f;
@@ -332,7 +331,7 @@ function buildFooter(y) {
   f.x = 0; f.y = y;
   mkRect(f, 80, 56, W-160, 1, { r:0.22,g:0.22,b:0.22 });
   IB(f, 'North West Scenic Tours', 80, 76, 17, C.white);
-  IR(f, "Ireland's Premier North West Tour Operator since 2012.\nGuided by locals who love every mile.",
+  IR(f, "Ireland's Premier North West Tour Operator since 2021.\nGuided by locals who love every mile.",
     80, 108, 14, C.footerFg, { w:320, lh:22 });
   var cols = [
     { t:'Tours',   items:['Wild Atlantic Way',"Giant's Causeway",'Donegal Highlands','Sligo & Yeats','Private Tours'], x:500 },

@@ -538,7 +538,7 @@ ul { list-style: none; }
 }
 .testimonials__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 28px;
 }
 .testimonial {
@@ -554,6 +554,7 @@ ul { list-style: none; }
 .testimonial p { font-size: .95rem; color: var(--mid); line-height: 1.7; font-style: italic; flex: 1; }
 .testimonial footer { font-size: .85rem; color: var(--light); font-style: normal; }
 .testimonial footer strong { color: var(--dark); display: block; }
+.testimonial__date { display: block; margin-top: 2px; font-size: .78rem; opacity: .75; }
 
 /* ===== ABOUT ===== */
 .about { padding: 96px 0; background: white; }

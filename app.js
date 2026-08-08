@@ -14,11 +14,12 @@ function closeMobile() {
   mobileMenu.classList.remove('open');
 }
 
-// Saturday picker with availability check
+// Tour-day picker (Fri/Sat/Sun) with availability check
 initSaturdayPicker('tourDate', onDateSelected);
 
+const MAX_GUESTS = 14;
 let selectedDateISO = '';
-let selectedDateAvailable = 18;
+let selectedDateAvailable = MAX_GUESTS;
 
 async function onDateSelected(dateStr, isoStr) {
   selectedDateISO = isoStr;
@@ -32,10 +33,10 @@ async function onDateSelected(dateStr, isoStr) {
     selectedDateAvailable = data.available;
 
     if (data.full) {
-      availEl.textContent = 'This date is fully booked (18/18 guests). Please choose another Saturday.';
+      availEl.textContent = `This date is fully booked (${MAX_GUESTS}/${MAX_GUESTS} guests). Please choose another date.`;
       availEl.className = 'availability-msg availability-msg--full';
     } else {
-      availEl.textContent = `${data.available} of 18 spots remaining on this date.`;
+      availEl.textContent = `${data.available} of ${MAX_GUESTS} spots remaining on this date.`;
       availEl.className = 'availability-msg availability-msg--ok';
     }
   } catch {

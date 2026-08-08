@@ -1,3 +1,6 @@
+// Tours run Fridays, Saturdays and Sundays.
+const TOUR_DAYS = [5, 6, 0]; // Fri, Sat, Sun
+
 function initSaturdayPicker(inputId, onSelect) {
   const input = document.getElementById(inputId);
   if (!input) return;
@@ -7,7 +10,7 @@ function initSaturdayPicker(inputId, onSelect) {
 
   flatpickr(input, {
     disable: [
-      function(date) { return date.getDay() !== 6; }
+      function(date) { return TOUR_DAYS.indexOf(date.getDay()) === -1; }
     ],
     minDate: today,
     dateFormat: 'D, d M Y',
